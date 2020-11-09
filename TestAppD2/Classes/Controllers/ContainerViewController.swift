@@ -10,11 +10,8 @@ import UIKit
 
 class ContainerViewController: UIViewController {
 
-    @IBOutlet weak var tableContainerView: UIView!
-    @IBOutlet weak var mainContainerView: UIView!
     @IBOutlet weak var leadingTabelViewLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerNavigationItem: UINavigationItem!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
