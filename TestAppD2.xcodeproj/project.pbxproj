@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6176009A2559ED9D00ABA3B8 /* NSNotification+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 617600992559ED9D00ABA3B8 /* NSNotification+Extension.swift */; };
 		6B14A31821F9B9F60011CF22 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14A31721F9B9F60011CF22 /* AppDelegate.swift */; };
 		6B14A31A21F9B9F60011CF22 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B14A31921F9B9F60011CF22 /* MasterViewController.swift */; };
 		6B14A31D21F9B9F60011CF22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6B14A31B21F9B9F60011CF22 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		617600992559ED9D00ABA3B8 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
 		6B14A31421F9B9F60011CF22 /* TestAppD2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppD2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B14A31721F9B9F60011CF22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B14A31921F9B9F60011CF22 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
@@ -61,6 +63,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		617600982559ED0900ABA3B8 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				617600992559ED9D00ABA3B8 /* NSNotification+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		6B14A30B21F9B9F60011CF22 = {
 			isa = PBXGroup;
 			children = (
@@ -93,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				6B14A31721F9B9F60011CF22 /* AppDelegate.swift */,
+				617600982559ED0900ABA3B8 /* Extensions */,
 				6B14A33621F9BBBD0011CF22 /* Models */,
 				6B14A33121F9BB530011CF22 /* Cells */,
 				6B14A32A21F9BAA60011CF22 /* Controllers */,
@@ -215,6 +226,7 @@
 				6B14A32C21F9BAED0011CF22 /* MenuViewController.swift in Sources */,
 				6B14A33521F9BBAE0011CF22 /* AnswerTableViewCell.swift in Sources */,
 				6B14A33021F9BB260011CF22 /* DetailViewController.swift in Sources */,
+				6176009A2559ED9D00ABA3B8 /* NSNotification+Extension.swift in Sources */,
 				6B14A33321F9BB910011CF22 /* QuestionTableViewCell.swift in Sources */,
 				6B14A34221F9C36B0011CF22 /* Question.swift in Sources */,
 				6B14A32E21F9BB070011CF22 /* ContainerViewController.swift in Sources */,

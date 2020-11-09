@@ -28,7 +28,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        NotificationCenter.default.post(name: NSNotification.Name("RequestedTagNotification"),
+        NotificationCenter.default.post(name: NSNotification.Name.requestedTagNotification,
                                         object: ArrayOfTags.shared[indexPath.row])
     }
 

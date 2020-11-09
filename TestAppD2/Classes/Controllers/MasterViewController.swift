@@ -31,7 +31,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         addRefreshControlOnTabelView()
         settingDynamicHeightForCell()
         addActivityIndicator()
-        NotificationCenter.default.addObserver(self, selector: #selector(self.requestedTagNotification(_:)), name: NSNotification.Name("RequestedTagNotification"), object: nil)
+       
+        NotificationCenter.default.addObserver(self, selector: #selector(self.requestedTagNotification(_:)), name: NSNotification.Name.requestedTagNotification, object: nil)
         requestedTag = ArrayOfTags.shared[0]
         definesPresentationContext = true
         questions = [Item]()
@@ -50,7 +51,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         numberOfPageToLoad += 1
     }
-
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let indexPath: IndexPath? = tableView.indexPathForSelectedRow
         let detailViewController = (segue.destination as? UINavigationController)?.topViewController as? DetailViewController
@@ -60,7 +61,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         detailViewController?.navigationItem.leftBarButtonItem = splitViewController?.displayModeButtonItem
         detailViewController?.navigationItem.leftItemsSupplementBackButton = true
     }
-
+    
+ 
     func addRefreshControlOnTabelView() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
