@@ -9,7 +9,7 @@
 import UIKit
 
 class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     private let kQuestionCellIdentifier = "CellForQuestion"
     private let kAnswerCellIdentifier = "CellForAnswer"
     
@@ -20,19 +20,19 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var answers: [AnswerItem]! = [AnswerItem()]
     var currentQuestion: Item!
     
+    let answersService = FabricRequest()
+    
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "AnswerTableViewCell", bundle: nil), forCellReuseIdentifier: kAnswerCellIdentifier)
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: kQuestionCellIdentifier)
         addRefreshControlOnTabelView()
         settingDynamicHeightForCell()
         addActivityIndicator()
+        activityIndicatorView.startAnimating()
     }
     
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if answers.count == 0 {
-            activityIndicatorView.startAnimating()
-        }
         return answers.count + 1
     }
     
@@ -52,25 +52,33 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     @objc func reloadData() {
-        tableView.reloadData()
-        if refreshControl != nil {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
-            let title = "Last update: \(formatter.string(from: Date()))"
-            let attrsDictionary = [NSAttributedString.Key.foregroundColor : UIColor.black]
-            let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
-            refreshControl?.attributedTitle = attributedTitle
-            refreshControl?.endRefreshing()
-        }
+        loadAnswers()
     }
     
     // MARK: - Public
     func loadAnswers() {
-        FabricRequest.request(withQuestionID: currentQuestion.question_id!) { data in
-            self.reload(inTableView: data)
+        answersService.request(withQuestionID: currentQuestion.question_id!) {
+            [unowned self] (answers, errorMessage) in
+            if let answers = answers {
+                self.answers = answers
+                self.tableView.reloadData()
+            }
+            if !errorMessage.isEmpty {
+                self.showErrorAlert(errorMessage: errorMessage)
+            }
+            self.activityIndicatorView.stopAnimating()
+            if self.refreshControl != nil {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MMM d, h:mm a"
+                let title = "Last update: \(formatter.string(from: Date()))"
+                let attrsDictionary = [NSAttributedString.Key.foregroundColor : UIColor.black]
+                let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
+                self.refreshControl?.attributedTitle = attributedTitle
+                self.refreshControl?.endRefreshing()
+            }
         }
     }
-
+    
     // MARK: - Private
     func addActivityIndicator() {
         activityIndicatorView = UIActivityIndicatorView()
@@ -95,15 +103,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.estimatedRowHeight = 100
     }
     
-    func reload(inTableView jsonData: Data?) {
-        answers = [AnswerItem]()
-        if let answerModel = try? JSONDecoder().decode(Answer.self, from: jsonData!) {
-            answers = answerModel.items
-        }
-        DispatchQueue.main.async(execute: {
-            self.tableView.reloadData()
-            self.activityIndicatorView.stopAnimating()
-        })
+    func showErrorAlert(errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
     }
-
 }
