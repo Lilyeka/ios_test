@@ -9,6 +9,18 @@
 import UIKit
 
 class CacheWithTimeInterval: NSObject {
+    
+    class func questionsForKey(_ key: String) -> [Item]? {
+        guard let data = objectForKey(key) else {
+            return nil
+        }
+        var questions = [Item]()
+        if let items = try? JSONDecoder().decode(Question.self, from: data).items {
+            questions = items!
+            return questions
+        }
+        return nil
+    }
 
     class func objectForKey(_ key: String) -> Data? {
         var arrayOfCachedData: [Data] = []

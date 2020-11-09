@@ -23,9 +23,11 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var screenEdgePanRecognizer: UIScreenEdgePanGestureRecognizer?
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
     
+    let questionSevice = FabricRequest()
+    
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: kCellIdentifier)
-        numberOfPageToLoad = 1
+        
         addRefreshControlOnTabelView()
         settingDynamicHeightForCell()
         addActivityIndicator()
@@ -33,8 +35,18 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         requestedTag = ArrayOfTags.shared[0]
         definesPresentationContext = true
         questions = [Item]()
-        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+        
+        numberOfPageToLoad = 1
+        self.activityIndicatorView.startAnimating()
+        questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { [unowned self] (questions, error) in
+            if let questions = questions {
+                self.questions = questions
+                self.tableView.reloadData()
+            }
+            if !error.isEmpty {
+                self.showErrorAlert(errorMessage: error)
+            }
+            self.activityIndicatorView.stopAnimating()
         }
         numberOfPageToLoad += 1
     }
@@ -70,11 +82,25 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         activityIndicatorView.hidesWhenStopped = true
         view.addSubview(activityIndicatorView)
     }
+    
+    func showErrorAlert(errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
+        self.present(alert, animated: true)
+    }
 
     @objc func reloadData() {
         numberOfPageToLoad = 1
-        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+        questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) {
+            [unowned self] (questions, error) in
+            if let questions = questions {
+                self.questions = questions
+                self.tableView.reloadData()
+            }
+            if !error.isEmpty {
+                self.showErrorAlert(errorMessage: error)
+            }
+            self.activityIndicatorView.stopAnimating()
         }
         numberOfPageToLoad += 1
         if refreshControl != nil {
@@ -87,24 +113,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             refreshControl?.endRefreshing()
         }
     }
-    
-    func reload(inTableView jsonData: Data?, removeAllObjects: Bool) {
-        if removeAllObjects {
-            questions = [Item]()
-        }
-        if let items = try? JSONDecoder().decode(Question.self, from: jsonData!).items {
-            questions = questions! + items!
-        }
-        DispatchQueue.main.async(execute: {
-            self.tableView.reloadData()
-            self.activityIndicatorView.stopAnimating()
-        })
-    }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if questions?.count == 0 {
-            activityIndicatorView.startAnimating()
-        }
         return questions?.count ?? 0
     }
     
@@ -129,10 +139,19 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             activityIndicatorView.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height - 50)
             activityIndicatorView.startAnimating()
             loadMoreStatus = true
-            FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-                self.reload(inTableView: data, removeAllObjects: false)
-                self.loadMoreStatus = false
-                self.numberOfPageToLoad += 1
+            questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (questions, error) in
+                if let questions = questions {
+                    for q in questions {
+                        self.questions?.append(q)
+                    }
+                    self.tableView.reloadData()
+                    self.numberOfPageToLoad += 1
+                    self.loadMoreStatus = false
+                }
+                if !error.isEmpty {
+                    self.showErrorAlert(errorMessage: error)
+                }
+                self.activityIndicatorView.stopAnimating()
                 self.activityIndicatorView.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height / 2)
             }
         }
@@ -143,8 +162,15 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         activityIndicatorView.startAnimating()
         requestedTag = notification?.object as! String
         numberOfPageToLoad = 1
-        FabricRequest.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (data) in
-            self.reload(inTableView: data, removeAllObjects: true)
+        questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (questions, error) in
+            if let questions = questions {
+                self.questions = questions
+                self.tableView.reloadData()
+            }
+            if !error.isEmpty {
+                self.showErrorAlert(errorMessage: error)
+            }
+            self.activityIndicatorView.stopAnimating()
         }
         numberOfPageToLoad += 1
     }
