@@ -64,6 +64,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func addRefreshControlOnTabelView() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
+        refreshControl?.backgroundColor = UIColor.white
         if let refreshControl = refreshControl {
             tableView.addSubview(refreshControl)
         }
@@ -101,17 +102,17 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 self.showErrorAlert(errorMessage: error)
             }
             self.activityIndicatorView.stopAnimating()
+            if self.refreshControl != nil {
+                let formatter = DateFormatter()
+                formatter.dateFormat = "MMM d, h:mm a"
+                let title = "Last update: \(formatter.string(from: Date()))"
+                let attrsDictionary = [NSAttributedString.Key.foregroundColor : UIColor.black]
+                let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
+                self.refreshControl?.attributedTitle = attributedTitle
+                self.refreshControl?.endRefreshing()
+            }
         }
         numberOfPageToLoad += 1
-        if refreshControl != nil {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
-            let title = "Last update: \(formatter.string(from: Date()))"
-            let attrsDictionary = [NSAttributedString.Key.foregroundColor : UIColor.white]
-            let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
-            refreshControl?.attributedTitle = attributedTitle
-            refreshControl?.endRefreshing()
-        }
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
