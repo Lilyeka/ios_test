@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CacheWithTimeInterval: NSObject {
+class CacheWithTimeInterval {
     
     class func questionsForKey(_ key: String) -> [Item]? {
         if let data = objectForKey(key),

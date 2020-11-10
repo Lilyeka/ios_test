@@ -79,7 +79,7 @@ class MasterViewController: UIViewController {
         let bounds: CGRect = UIScreen.main.bounds
         activityIndicatorView.center = CGPoint(x: bounds.size.width / 2, y: bounds.size.height - 50)
         activityIndicatorView.startAnimating()
-        questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (questions, error) in
+        questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { [unowned self] (questions, error) in
             if let questions = questions {
                 for q in questions {
                     self.questions?.append(q)
