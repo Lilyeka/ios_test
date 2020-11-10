@@ -20,7 +20,7 @@ class ContainerViewController: UIViewController {
     }
 
     @objc func requestedTagNotification(_ notification: NSNotification) {
-        let requestedTag = notification.object as! String
+        let requestedTag = notification.object as? String ?? ""
         title = requestedTag
     }
     

@@ -163,7 +163,7 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     // MARK: - Notification
     @objc func requestedTagNotification(_ notification: Notification?) {
         activityIndicatorView.startAnimating()
-        requestedTag = notification?.object as! String
+        let requestedTag = notification?.object as? String
         numberOfPageToLoad = 1
         questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { (questions, error) in
             if let questions = questions {

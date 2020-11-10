@@ -57,7 +57,8 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - Public
     func loadAnswers() {
-        answersService.request(withQuestionID: currentQuestion.question_id!) {
+        guard let questionId = currentQuestion.question_id else {return}
+        answersService.request(withQuestionID: questionId) {
             [unowned self] (answers, errorMessage) in
             if let answers = answers {
                 self.answers = answers

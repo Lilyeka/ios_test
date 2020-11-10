@@ -18,9 +18,9 @@ class FabricRequest {
     func request(tagged stringTagged: String?, numberOfPageToLoad: Int, withBlock completionHandler: @escaping ([Item]?, String) -> Void) {
         let protocolHostPath = "https://api.stackexchange.com/2.2/questions"
         let parametrs = "order=desc&sort=activity&site=stackoverflow&key=G*0DJzE8SfBrKn4tMej85Q(("
-        let stringURL = protocolHostPath + "?" + parametrs + "&pagesize=50&tagged=" + stringTagged! + String(format: "&page=%ld", numberOfPageToLoad)
+        let tagName = stringTagged ?? ""
+        let stringURL = protocolHostPath + "?" + parametrs + "&pagesize=50&tagged=" + tagName + String(format: "&page=%ld", numberOfPageToLoad)
         if CacheWithTimeInterval.objectForKey(stringURL) == nil {
-            let stringURL = protocolHostPath + "?" + parametrs + "&pagesize=50&tagged=" + stringTagged! + String(format: "&page=%ld", numberOfPageToLoad)
             guard let url = URL(string: stringURL) else {
                 return
             }

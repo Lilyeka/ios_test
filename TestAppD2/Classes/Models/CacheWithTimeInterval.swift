@@ -11,51 +11,41 @@ import UIKit
 class CacheWithTimeInterval: NSObject {
     
     class func questionsForKey(_ key: String) -> [Item]? {
-        guard let data = objectForKey(key) else {
-            return nil
-        }
-        var questions = [Item]()
-        if let items = try? JSONDecoder().decode(Question.self, from: data).items {
-            questions = items!
-            return questions
+        if let data = objectForKey(key),
+           let items = try? JSONDecoder().decode(Question.self, from: data).items {
+            return items
         }
         return nil
     }
 
     class func objectForKey(_ key: String) -> Data? {
-        var arrayOfCachedData: [Data] = []
-        if UserDefaults.standard.array(forKey: "cache") != nil {
-            arrayOfCachedData = UserDefaults.standard.array(forKey: "cache") as! [Data]
-        } else {
-            arrayOfCachedData = []
-        }
+        let arrayOfCachedData: [Data] = UserDefaults.standard.array(forKey: "cache") as? [Data] ?? []
         var mutableArrayOfCachedData = arrayOfCachedData
         var deletedCount = 0
         for (index, data) in arrayOfCachedData.enumerated() {
-            let storedData = try! PropertyListDecoder().decode(StoredData.self, from: data)
-            if abs(storedData.date.timeIntervalSinceNow) < 5*60 {
-                if storedData.key == key {
-                    return storedData.data
+            if let storedData = try? PropertyListDecoder().decode(StoredData.self, from: data) {
+                if abs(storedData.date.timeIntervalSinceNow) < 5*60 {
+                    if storedData.key == key {
+                        return storedData.data
+                    }
+                } else {
+                    mutableArrayOfCachedData.remove(at: index - deletedCount)
+                    deletedCount += 1
+                    UserDefaults.standard.set(mutableArrayOfCachedData, forKey: "cache")
                 }
-            } else {
-                mutableArrayOfCachedData.remove(at: index - deletedCount)
-                deletedCount += 1
-                UserDefaults.standard.set(mutableArrayOfCachedData, forKey: "cache")
             }
         }
         return nil
     }
     
     class func set(data: Data?, for key: String) {
-        var arrayOfCachedData: [Data] = []
-        if UserDefaults.standard.array(forKey: "cache") != nil {
-            arrayOfCachedData = UserDefaults.standard.array(forKey: "cache") as! [Data]
-        }
+        var arrayOfCachedData: [Data]  = UserDefaults.standard.array(forKey: "cache") as? [Data] ?? []
         if data != nil {
             if CacheWithTimeInterval.objectForKey(key) == nil {
                 let storedData = StoredData(key: key, date: Date(), data: data!)
-                let data = try? PropertyListEncoder().encode(storedData)
-                arrayOfCachedData.append(data!)
+                if let data = try? PropertyListEncoder().encode(storedData) {
+                    arrayOfCachedData.append(data)
+                }
             }
         }
         UserDefaults.standard.set(arrayOfCachedData, forKey: "cache")
