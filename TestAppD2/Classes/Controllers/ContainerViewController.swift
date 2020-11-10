@@ -9,7 +9,7 @@
 import UIKit
 
 class ContainerViewController: UIViewController {
-
+    // MARK: - IBOutlets
     @IBOutlet weak var leadingTabelViewLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
     
@@ -19,11 +19,12 @@ class ContainerViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(self.requestedTagNotification(_:)), name: NSNotification.Name.requestedTagNotification, object: nil)
     }
 
+    // MARK: - Notification
     @objc func requestedTagNotification(_ notification: NSNotification) {
         let requestedTag = notification.object as? String ?? ""
         title = requestedTag
     }
-    
+    // MARK: - IBAction
     @IBAction func menu(_ sender: Any) {
         if leadingTabelViewLayoutConstraint.constant == 0 {
             leadingTabelViewLayoutConstraint.constant = UIScreen.main.bounds.size.width / 2

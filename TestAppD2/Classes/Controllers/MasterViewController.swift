@@ -8,23 +8,30 @@
 
 import UIKit
 
-class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class MasterViewController: UIViewController {
+    // MARK: - IBOutlets
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var leadingTabelViewLayoutConstraint: NSLayoutConstraint!
+    @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
+    // MARK: - Constants
+    private let kCellIdentifier = "CellForQuestion"
+    private let questionSevice = FabricRequest()
     
-    let kCellIdentifier = "CellForQuestion"
-    @IBOutlet var tableView: UITableView!
-    var activityIndicatorView: UIActivityIndicatorView!
+    // MARK: - Variables
     var questions: [Item]? = []
-    var refreshControl: UIRefreshControl?
     var loadMoreStatus = false
     var numberOfPageToLoad: Int = 0
     var requestedTag = ""
-    @IBOutlet weak var leadingTabelViewLayoutConstraint: NSLayoutConstraint!
+    
+    // MARK: - Views
+    var activityIndicatorView: UIActivityIndicatorView!
+    var refreshControl: UIRefreshControl?
+    
+    // MARK: - Recognisers
     var panRecognizer: UIPanGestureRecognizer?
     var screenEdgePanRecognizer: UIScreenEdgePanGestureRecognizer?
-    @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
     
-    let questionSevice = FabricRequest()
-    
+    // MARK: - Lifecycle
     override func viewDidLoad() {
         tableView.register(UINib(nibName: "QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: kCellIdentifier)
         
@@ -62,8 +69,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         detailViewController?.navigationItem.leftItemsSupplementBackButton = true
     }
     
- 
-    func addRefreshControlOnTabelView() {
+    // MARK: - Private methods
+    private func addRefreshControlOnTabelView() {
         refreshControl = UIRefreshControl()
         refreshControl?.addTarget(self, action: #selector(self.reloadData), for: .valueChanged)
         refreshControl?.backgroundColor = UIColor.white
@@ -72,12 +79,12 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func settingDynamicHeightForCell() {
+    private func settingDynamicHeightForCell() {
         tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 100
     }
     
-    func addActivityIndicator() {
+    private func addActivityIndicator() {
         activityIndicatorView = UIActivityIndicatorView()
         activityIndicatorView.style = .gray
         let bounds: CGRect = UIScreen.main.bounds
@@ -86,12 +93,12 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         view.addSubview(activityIndicatorView)
     }
     
-    func showErrorAlert(errorMessage: String) {
+    private func showErrorAlert(errorMessage: String) {
         let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "ОК", style: .cancel, handler: nil))
         self.present(alert, animated: true)
     }
-
+    // MARK: - Actions
     @objc func reloadData() {
         numberOfPageToLoad = 1
         questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) {
@@ -116,24 +123,8 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
         numberOfPageToLoad += 1
     }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return questions?.count ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier, for: indexPath) as? QuestionTableViewCell
-        if questions?.count ?? 0 > 0 {
-            cell?.fill(questions?[indexPath.row])
-        }
-        return cell!
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "DetailSegue", sender: self)
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-    
+       
+    //MARK: -UIScrollViewDelegate
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let actualPosition: CGFloat = scrollView.contentOffset.y
         let contentHeight: CGFloat = scrollView.contentSize.height - scrollView.frame.size.height
@@ -199,6 +190,28 @@ class MasterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             panRecognizer?.isEnabled = false
             tableView.allowsSelection = true
         }
+    }
+}
+
+// MARK: - UITableViewDataSource
+extension MasterViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return questions?.count ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: kCellIdentifier, for: indexPath) as? QuestionTableViewCell
+        if questions?.count ?? 0 > 0 {
+            cell?.fill(questions?[indexPath.row])
+        }
+        return cell!
+    }
+}
+// MARK: - UITableViewDelegate
+extension MasterViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "DetailSegue", sender: self)
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
