@@ -34,6 +34,9 @@ class DetailViewController: UIViewController {
         settingDynamicHeightForCell()
         addActivityIndicator()
         activityIndicatorView.startAnimating()
+        if let title = currentQuestion.title {
+            titleNavigationItem.title = "\(String(describing: title))"
+        }
     }
     
     // MARK: - Actions
@@ -108,7 +111,6 @@ extension DetailViewController: UITableViewDataSource {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: kQuestionCellIdentifier, for: indexPath) as? QuestionTableViewCell
             cell?.fill(currentQuestion)
-            titleNavigationItem.title = "\(String(describing: currentQuestion.title))"
             return cell!
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: kAnswerCellIdentifier, for: indexPath) as? AnswerTableViewCell
