@@ -11,7 +11,7 @@
         <!--Master View Controller-->
         <scene sceneID="sKn-T4-qrq">
             <objects>
-                <viewController id="PUx-nP-rFy" customClass="MasterViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PUx-nP-rFy" customClass="MasterViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O1W-kL-IEx"/>
                         <viewControllerLayoutGuide type="bottom" id="Xc3-tW-nWr"/>
@@ -67,7 +67,7 @@
         <!--Container View Controller-->
         <scene sceneID="EOA-1r-zS5">
             <objects>
-                <viewController id="shY-Rs-ztY" customClass="ContainerViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="shY-Rs-ztY" customClass="ContainerViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2YB-3d-mGE"/>
                         <viewControllerLayoutGuide type="bottom" id="ca1-oK-QZh"/>
@@ -140,7 +140,7 @@
         <!--Detail View Controller-->
         <scene sceneID="aic-We-xmP">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="KM6-rU-ZrG" customClass="DetailViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="KM6-rU-ZrG" customClass="DetailViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="akD-Ya-JAt"/>
                         <viewControllerLayoutGuide type="bottom" id="Ebc-Ha-Ap0"/>
@@ -192,12 +192,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVm-HI-hgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2421" y="-978"/>
+            <point key="canvasLocation" x="-2902" y="-970"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="mhr-wy-rLc">
             <objects>
-                <viewController id="6eA-1w-96r" customClass="MenuViewController" customModule="TestAppD2" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6eA-1w-96r" customClass="MenuViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7mi-Cn-uOY"/>
                         <viewControllerLayoutGuide type="bottom" id="Mc9-kE-Pda"/>

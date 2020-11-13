@@ -27,7 +27,7 @@ class FabricRequest {
             let task: URLSessionDataTask = defaultSession.dataTask(with: url) {
                 [weak self] (data, response, error) in
                 if let error = error {
-                    self?.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+                    self?.errorMessage = "DataTask error: " + error.localizedDescription + "\n"
                 } else if
                     let data = data,
                     let response = response as? HTTPURLResponse,
@@ -57,7 +57,7 @@ class FabricRequest {
         let task: URLSessionDataTask = defaultSession.dataTask(with: url) {
             [weak self] (data, response, error) in
             if let error = error {
-                self?.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
+                self?.errorMessage = "DataTask error: " + error.localizedDescription + "\n"
             } else if
                 let data = data,
                 let response = response as? HTTPURLResponse,

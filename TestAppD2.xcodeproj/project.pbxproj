@@ -30,7 +30,7 @@
 
 /* Begin PBXFileReference section */
 		617600992559ED9D00ABA3B8 /* NSNotification+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSNotification+Extension.swift"; sourceTree = "<group>"; };
-		6B14A31421F9B9F60011CF22 /* TestAppD2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestAppD2.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B14A31421F9B9F60011CF22 /* MyChapApplication.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyChapApplication.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B14A31721F9B9F60011CF22 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6B14A31921F9B9F60011CF22 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		6B14A31C21F9B9F60011CF22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -82,7 +82,7 @@
 		6B14A31521F9B9F60011CF22 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6B14A31421F9B9F60011CF22 /* TestAppD2.app */,
+				6B14A31421F9B9F60011CF22 /* MyChapApplication.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -163,7 +163,7 @@
 			);
 			name = TestAppD2;
 			productName = TestAppD1;
-			productReference = 6B14A31421F9B9F60011CF22 /* TestAppD2.app */;
+			productReference = 6B14A31421F9B9F60011CF22 /* MyChapApplication.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -385,8 +385,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "------------------.TestAppD2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "---------------------MyChapApplication";
+				PRODUCT_NAME = MyChapApplication;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -403,8 +403,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "------------------.TestAppD2";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = "---------------------MyChapApplication";
+				PRODUCT_NAME = MyChapApplication;
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

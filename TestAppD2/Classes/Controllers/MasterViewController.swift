@@ -81,9 +81,7 @@ class MasterViewController: UIViewController {
         activityIndicatorView.startAnimating()
         questionSevice.request(tagged: requestedTag, numberOfPageToLoad: numberOfPageToLoad) { [unowned self] (questions, error) in
             if let questions = questions {
-                for q in questions {
-                    self.questions?.append(q)
-                }
+                self.questions? += questions
                 self.tableView.reloadData()
                 self.numberOfPageToLoad += 1
                 self.loadMoreStatus = false

@@ -48,23 +48,23 @@ class DetailViewController: UIViewController {
     func loadAnswers() {
         guard let questionId = currentQuestion.question_id else {return}
         answersService.request(withQuestionID: questionId) {
-            [unowned self] (answers, errorMessage) in
+            [weak self] (answers, errorMessage) in
             if let answers = answers {
-                self.answers = answers
-                self.tableView.reloadData()
+                self!.answers = answers
+                self!.tableView.reloadData()
             }
             if !errorMessage.isEmpty {
-                self.showErrorAlert(errorMessage: errorMessage)
+                self!.showErrorAlert(errorMessage: errorMessage)
             }
-            self.activityIndicatorView.stopAnimating()
-            if self.refreshControl != nil {
+            self!.activityIndicatorView.stopAnimating()
+            if self!.refreshControl != nil {
                 let formatter = DateFormatter()
                 formatter.dateFormat = "MMM d, h:mm a"
                 let title = "Last update: \(formatter.string(from: Date()))"
                 let attrsDictionary = [NSAttributedString.Key.foregroundColor : UIColor.black]
                 let attributedTitle = NSAttributedString(string: title, attributes: attrsDictionary)
-                self.refreshControl?.attributedTitle = attributedTitle
-                self.refreshControl?.endRefreshing()
+                self!.refreshControl?.attributedTitle = attributedTitle
+                self!.refreshControl?.endRefreshing()
             }
         }
     }
