@@ -32,9 +32,11 @@ class QuestionTableViewCell: UITableViewCell {
         numberOfAnswerLabel.text = String(format: "%li", Int(question?.answer_count ?? 0))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
-        if let aFormat = question?.smartDateFormat {
-            let aDate = Date.init(timeIntervalSince1970: TimeInterval(exactly: ((question?.last_activity_date)!))!)
-            dateModificationLabel.text = "\(dateFormatter.string(from: aDate)) \(aFormat)"
+        if let aFormat = question?.smartDateFormat,
+            let last_activity_date = question?.last_activity_date,
+            let timeInterval = TimeInterval(exactly: last_activity_date) {
+                let aDate = Date.init(timeIntervalSince1970: timeInterval)
+                dateModificationLabel.text = "\(dateFormatter.string(from: aDate)) \(aFormat)"
         }
     }
 

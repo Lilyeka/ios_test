@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i8m-g4-j2q">
-    <device id="retina5_9" orientation="landscape">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="i8m-g4-j2q">
+    <device id="retina5_9" orientation="landscape" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +11,7 @@
         <!--Master View Controller-->
         <scene sceneID="sKn-T4-qrq">
             <objects>
-                <viewController id="PUx-nP-rFy" customClass="MasterViewController" customModule="TestAppD1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="PUx-nP-rFy" customClass="MasterViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="O1W-kL-IEx"/>
                         <viewControllerLayoutGuide type="bottom" id="Xc3-tW-nWr"/>
@@ -51,7 +49,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y8q-pN-Kh2" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804" y="116"/>
+            <point key="canvasLocation" x="-1655" y="382"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="b0Y-J2-wlT">
@@ -69,7 +67,7 @@
         <!--Container View Controller-->
         <scene sceneID="EOA-1r-zS5">
             <objects>
-                <viewController id="shY-Rs-ztY" customClass="ContainerViewController" customModule="TestAppD1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="shY-Rs-ztY" customClass="ContainerViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2YB-3d-mGE"/>
                         <viewControllerLayoutGuide type="bottom" id="ca1-oK-QZh"/>
@@ -115,16 +113,13 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="containerNavigationItem" destination="ia8-X7-gX6" id="qmg-Ic-gQ3"/>
                         <outlet property="leadingTabelViewLayoutConstraint" destination="ZI9-Lv-ice" id="Cay-4j-qGx"/>
-                        <outlet property="mainContainerView" destination="zc0-vP-dB0" id="4sP-91-G47"/>
-                        <outlet property="tableContainerView" destination="xOO-Qd-6an" id="reH-6M-l0q"/>
                         <outlet property="trailingTableViewLayoutConstraint" destination="sNG-k6-sYK" id="xat-j1-l8K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AAc-fn-692" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1692" y="133.5832083958021"/>
+            <point key="canvasLocation" x="-1654" y="-1154"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Z15-89-gGY">
@@ -140,12 +135,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeR-mB-fAz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-804" y="885"/>
+            <point key="canvasLocation" x="-2384" y="1366"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="aic-We-xmP">
             <objects>
-                <viewController storyboardIdentifier="DetailViewController" id="KM6-rU-ZrG" customClass="DetailViewController" customModule="TestAppD1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailViewController" id="KM6-rU-ZrG" customClass="DetailViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="akD-Ya-JAt"/>
                         <viewControllerLayoutGuide type="bottom" id="Ebc-Ha-Ap0"/>
@@ -155,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dQP-Ji-mPT">
-                                <rect key="frame" x="0.0" y="0.0" width="812" height="269"/>
+                                <rect key="frame" x="0.0" y="0.0" width="812" height="290"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <sections/>
                                 <connections>
@@ -181,7 +176,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Iy-Xl-AyC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="31" y="885"/>
+            <point key="canvasLocation" x="-2384" y="2298"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PBR-Al-7V2">
@@ -197,12 +192,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVm-HI-hgm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2481" y="134"/>
+            <point key="canvasLocation" x="-2902" y="-970"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="mhr-wy-rLc">
             <objects>
-                <viewController id="6eA-1w-96r" customClass="MenuViewController" customModule="TestAppD1" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="6eA-1w-96r" customClass="MenuViewController" customModule="MyChapApplication" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="7mi-Cn-uOY"/>
                         <viewControllerLayoutGuide type="bottom" id="Mc9-kE-Pda"/>
@@ -219,7 +214,7 @@
                                         <rect key="frame" x="0.0" y="28" width="406" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="F5j-W6-YGU" id="cfU-je-XpI">
-                                            <rect key="frame" x="44" y="0.0" width="318" height="43.666666666666664"/>
+                                            <rect key="frame" x="44" y="0.0" width="362" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -241,7 +236,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AzO-rT-itk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-953" y="-529"/>
+            <point key="canvasLocation" x="-884" y="-2129"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>

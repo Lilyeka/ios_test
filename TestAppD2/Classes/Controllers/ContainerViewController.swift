@@ -9,24 +9,22 @@
 import UIKit
 
 class ContainerViewController: UIViewController {
-
-    @IBOutlet weak var tableContainerView: UIView!
-    @IBOutlet weak var mainContainerView: UIView!
+    // MARK: - IBOutlets
     @IBOutlet weak var leadingTabelViewLayoutConstraint: NSLayoutConstraint!
     @IBOutlet weak var trailingTableViewLayoutConstraint: NSLayoutConstraint!
-    @IBOutlet weak var containerNavigationItem: UINavigationItem!
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
-        navigationItem.title = "objective-c"
-        NotificationCenter.default.addObserver(self, selector: #selector(self.requestedTagNotification(_:)), name: NSNotification.Name("RequestedTagNotification"), object: nil)
+        navigationItem.title = ArrayOfTags.shared[0]
+        NotificationCenter.default.addObserver(self, selector: #selector(self.requestedTagNotification(_:)), name: NSNotification.Name.requestedTagNotification, object: nil)
     }
 
+    // MARK: - Notification
     @objc func requestedTagNotification(_ notification: NSNotification) {
-        let requestedTag = notification.object as! String
+        let requestedTag = notification.object as? String ?? ""
         title = requestedTag
     }
-    
+    // MARK: - IBAction
     @IBAction func menu(_ sender: Any) {
         if leadingTabelViewLayoutConstraint.constant == 0 {
             leadingTabelViewLayoutConstraint.constant = UIScreen.main.bounds.size.width / 2

@@ -8,6 +8,6 @@
 
 import UIKit
 
-class ArrayOfTags: NSObject {
+class ArrayOfTags {
     static let shared = ["objective-c", "ios", "xcode", "cocoa-touch", "iphone"]
 }

@@ -44,10 +44,13 @@ class AnswerTableViewCell: UITableViewCell {
         numberOfVotesLabel.text = String(format: "%li", Int(answer?.score ?? 0))
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm d-MM-yyyy"
-        if let last_activity_date = answer?.last_activity_date {
-            lastActivityDateLabel.text = "\(dateFormatter.string(from: Date.init(timeIntervalSince1970: TimeInterval(exactly: last_activity_date)!)))"
+        if let last_activity_date = answer?.last_activity_date,
+           let timeInterval = TimeInterval(exactly: last_activity_date){
+            lastActivityDateLabel.text = "\(dateFormatter.string(from: Date.init(timeIntervalSince1970: timeInterval)))"
         }
-        checkImageView.isHidden = (answer?.is_accepted != nil) ?? true
+        if let answerIsAccepted = answer?.is_accepted  {
+            checkImageView.isHidden = !answerIsAccepted
+        }
     }
     
 }

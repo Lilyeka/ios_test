@@ -8,15 +8,6 @@
 
 import UIKit
 
-class Answer1: NSObject {
-    var questionID: Int? = 0
-    var body: String? = ""
-    var author: String? = ""
-    var numberOfVotes: Int? = 0
-    var lastActivityDate: Date?
-    var isAccepted: Bool? = false
-}
-
 class Answer: Decodable {
     var items: [AnswerItem]?
 }
